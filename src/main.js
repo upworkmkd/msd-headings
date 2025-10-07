@@ -83,13 +83,14 @@ Actor.main(async () => {
                     baseDomain
                 });
                 
-                // Create page result
+                // Create page result (remove internal links from response)
+                const { _internalLinks, ...headingsDataClean } = headingsData;
                 const pageResult = {
                     url: normalizedUrl,
                     pageStatusCode: statusCode,
                     analysis_date: new Date().toISOString(),
                     data_source: 'msd_headings',
-                    ...headingsData
+                    ...headingsDataClean
                 };
 
                 results.push(pageResult);
@@ -98,6 +99,36 @@ Actor.main(async () => {
                 console.log(`Found ${headingsData.totalHeadings} headings (H1: ${headingsData.h1Count}, H2: ${headingsData.h2Count}, H3: ${headingsData.h3Count})`);
                 if (headingsData.headingScore !== undefined) {
                     console.log(`Heading Score: ${headingsData.headingScore}/100`);
+                }
+                
+                // Extract internal links for further crawling
+                if (headingsData._internalLinks && headingsData._internalLinks.length > 0) {
+                    for (const linkObj of headingsData._internalLinks) {
+                        try {
+                            const link = linkObj.url || linkObj;
+                            let fullUrl;
+                            if (link.startsWith('http')) {
+                                fullUrl = link;
+                            } else if (link.startsWith('/')) {
+                                fullUrl = baseDomain + link;
+                            } else {
+                                fullUrl = new URL(link, normalizedUrl).href;
+                            }
+                            
+                            const normalizedLink = urlNormalizer.normalize(fullUrl);
+                            
+                            // Only add if it's from the same domain and not already visited
+                            if (normalizedLink.startsWith(baseDomain) && 
+                                !visitedUrls.has(normalizedLink) && 
+                                !urlsToProcess.includes(normalizedLink)) {
+                                urlsToProcess.push(normalizedLink);
+                                console.log(`Added to crawl queue: ${normalizedLink}`);
+                            }
+                        } catch (e) {
+                            // Skip invalid URLs
+                            continue;
+                        }
+                    }
                 }
                 
                 processedCount++;

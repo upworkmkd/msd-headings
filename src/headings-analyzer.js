@@ -43,6 +43,9 @@ class HeadingsAnalyzer {
         // Generate recommendations
         const headingRecommendations = this.generateRecommendations(basicHeadings, headingStructure, headingScore);
         
+        // Extract internal links for crawling (but don't include in response)
+        const internalLinks = this.extractInternalLinks($, url, baseDomain);
+        
         return {
             // Basic heading counts and text
             ...basicHeadings,
@@ -56,7 +59,10 @@ class HeadingsAnalyzer {
             headingRecommendations: headingRecommendations,
             
             // Additional metadata
-            pageTitle: title
+            pageTitle: title,
+            
+            // Internal links for crawling (not included in final response)
+            _internalLinks: internalLinks
         };
     }
 
@@ -289,6 +295,48 @@ class HeadingsAnalyzer {
         }
 
         return recommendations;
+    }
+
+    extractInternalLinks($, baseUrl, baseDomain) {
+        const links = $('a[href]');
+        const internalLinks = [];
+        
+        links.each((_, link) => {
+            const href = $(link).attr('href');
+            
+            if (href) {
+                try {
+                    const url = new URL(href, baseUrl);
+                    const baseHost = new URL(baseUrl).hostname;
+                    
+                    // Skip hash-only links
+                    const baseUrlObj = new URL(baseUrl);
+                    const isHashOnlyLink = (
+                        url.href === baseUrl + '#' || 
+                        url.href === baseUrl + '#content' ||
+                        (url.pathname === baseUrlObj.pathname && url.hash && url.hash !== '') ||
+                        (url.pathname === '/' && url.hash && url.hash !== '') ||
+                        (url.pathname.endsWith('/') && url.hash && url.hash !== '' && url.pathname === baseUrlObj.pathname) ||
+                        href.endsWith('#')
+                    );
+                    
+                    if (isHashOnlyLink) {
+                        return;
+                    }
+                    
+                    if (url.hostname === baseHost) {
+                        internalLinks.push({
+                            url: url.href,
+                            anchorText: $(link).text().trim()
+                        });
+                    }
+                } catch (e) {
+                    // Skip invalid URLs
+                }
+            }
+        });
+        
+        return internalLinks;
     }
 
 }
