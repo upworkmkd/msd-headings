@@ -1,5 +1,5 @@
 /**
- * Simple test script for MSD Headings Analysis
+ * Simple test script for SEO Headings Structure Analyzer
  * 
  * @author MySmartDigital
  * @description Simple test to verify basic functionality without API server
@@ -15,7 +15,7 @@ async function testHeadingsAnalyzer() {
     try {
         // Initialize components
         const analyzer = new HeadingsAnalyzer({
-            userAgent: 'Mozilla/5.0 (compatible; MSD-Headings-Test/1.0)',
+            userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,
             maxRedirects: 5,
             includeHeadingText: true,
@@ -33,7 +33,7 @@ async function testHeadingsAnalyzer() {
         console.log('Fetching page content...');
         const response = await axios.get(testUrl, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; MSD-Headings-Test/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
                 'Accept-Language': 'en-US,en;q=0.9',
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
             },

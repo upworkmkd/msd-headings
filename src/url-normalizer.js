@@ -1,5 +1,5 @@
 /**
- * URL Normalizer for MSD Headings Actor
+ * URL Normalizer for SEO Headings Structure Analyzer
  * 
  * @author MySmartDigital
  * @description Utility class for normalizing URLs to ensure consistent comparison

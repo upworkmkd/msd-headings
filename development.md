@@ -5,7 +5,7 @@
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd msd-headings
+cd seo-headings-structure-analyzer
 ```
 
 2. Install dependencies:
@@ -27,7 +27,7 @@ npm start
 |-----------|------|----------|---------|-------------|
 | `startUrl` | string | Yes | - | The homepage URL to start crawling from |
 | `maxPages` | integer | Yes | 2 | Maximum number of pages to crawl and analyze |
-| `userAgent` | string | No | Mozilla/5.0 (compatible; MSD-Headings/1.0) | User agent string for requests |
+| `userAgent` | string | No | Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0) | User agent string for requests |
 | `timeout` | integer | No | 10000 | Request timeout in milliseconds |
 | `maxRedirects` | integer | No | 5 | Maximum number of redirects to follow |
 | `includeHeadingText` | boolean | No | true | Whether to include actual heading text content |
@@ -40,7 +40,7 @@ npm start
 {
   "startUrl": "https://rouvres77.fr/",
   "maxPages": 2,
-  "userAgent": "Mozilla/5.0 (compatible; MSD-Headings/1.0)",
+  "userAgent": "Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)",
   "timeout": 10000,
   "maxRedirects": 5,
   "includeHeadingText": true,
@@ -97,7 +97,7 @@ Create a `.env` file with the following variables:
 
 ```env
 # Optional: Override default user agent
-USER_AGENT=Mozilla/5.0 (compatible; MSD-Headings/1.0)
+USER_AGENT=Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)
 
 # Optional: Override default timeout
 DEFAULT_TIMEOUT=10000
@@ -134,7 +134,7 @@ Create a `.env` file with the following variables:
 
 ```env
 # Optional: Override default user agent
-USER_AGENT=Mozilla/5.0 (compatible; MSD-Headings/1.0)
+USER_AGENT=Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)
 
 # Optional: Override default timeout
 DEFAULT_TIMEOUT=10000

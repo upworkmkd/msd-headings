@@ -1,5 +1,5 @@
 /**
- * Local API Server for MSD Headings Analysis Actor
+ * Local API Server for SEO Headings Structure Analyzer
  * 
  * @author MySmartDigital
  * @description Express server for testing the headings analysis locally
@@ -25,7 +25,7 @@ const urlNormalizer = new URLNormalizer();
 app.get('/health', (req, res) => {
     res.json({ 
         status: 'OK', 
-        message: 'MSD Headings API is running',
+        message: 'SEO Headings Structure Analyzer API is running',
         timestamp: new Date().toISOString()
     });
 });
@@ -36,7 +36,7 @@ app.post('/analyze', async (req, res) => {
         const {
             startUrl,
             maxPages = 2,
-            userAgent = 'Mozilla/5.0 (compatible; MSD-Headings/1.0)',
+            userAgent = 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)',
             timeout = 10000,
             maxRedirects = 5,
             includeHeadingText = true,
@@ -384,7 +384,7 @@ function getScoreGrade(score) {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`MSD Headings API server running on port ${PORT}`);
+    console.log(`SEO Headings Structure Analyzer API server running on port ${PORT}`);
     console.log(`Health check: http://localhost:${PORT}/health`);
     console.log(`Analysis endpoint: http://localhost:${PORT}/analyze`);
 });

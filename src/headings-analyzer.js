@@ -1,5 +1,5 @@
 /**
- * Headings Analyzer for MSD Headings Actor
+ * Headings Analyzer for SEO Headings Structure Analyzer
  * 
  * @author MySmartDigital
  * @description Core headings analysis engine that extracts and analyzes heading structure,
@@ -11,7 +11,7 @@ const axios = require('axios');
 
 class HeadingsAnalyzer {
     constructor(options = {}) {
-        this.userAgent = options.userAgent || 'Mozilla/5.0 (compatible; MSD-Headings/1.0)';
+        this.userAgent = options.userAgent || 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)';
         this.timeout = options.timeout || 10000;
         this.maxRedirects = options.maxRedirects || 5;
         this.includeHeadingText = options.includeHeadingText !== false;

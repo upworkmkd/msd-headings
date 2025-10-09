@@ -1,7 +1,7 @@
 {
-  "name": "msd-headings",
+  "name": "seo-headings-structure-analyzer",
   "version": "1.0.0",
-  "description": "Headings analysis actor for MySmartDigital",
+  "description": "SEO Headings Structure Analyzer for Smart Digital",
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js",

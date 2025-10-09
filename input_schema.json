@@ -1,5 +1,5 @@
 {
-  "title": "MSD Headings Analysis Input",
+  "title": "SEO Headings Structure Analyzer Input",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
@@ -24,7 +24,7 @@
       "title": "User Agent",
       "type": "string",
       "description": "User agent string to use for requests",
-      "default": "Mozilla/5.0 (compatible; MSD-Headings/1.0)",
+      "default": "Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)",
       "editor": "textfield"
     },
     "timeout": {

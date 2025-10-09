@@ -1,5 +1,5 @@
 /**
- * MSD Headings Analysis Actor - Main Entry Point
+ * SEO Headings Structure Analyzer - Main Entry Point
  * 
  * @author MySmartDigital
  * @description Analyzes websites for heading structure, hierarchy, and SEO optimization
@@ -16,7 +16,7 @@ Actor.main(async () => {
     const {
         startUrl = 'https://example.com',
         maxPages = 2,
-        userAgent = 'Mozilla/5.0 (compatible; MSD-Headings/1.0)',
+        userAgent = 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)',
         timeout = 10000,
         maxRedirects = 5,
         includeHeadingText = true,
@@ -24,7 +24,7 @@ Actor.main(async () => {
         includeHeadingScore = true
     } = input;
 
-    console.log('Starting MSD Headings Analysis...');
+    console.log('Starting SEO Headings Structure Analysis...');
     console.log('Input:', JSON.stringify(input, null, 2));
 
     // Initialize components

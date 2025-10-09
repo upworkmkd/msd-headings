@@ -1,4 +1,4 @@
-# MSD Headings Analysis Actor
+# SEO Headings Structure Analyzer
 
 A specialized Apify actor for analyzing heading structure, hierarchy, and SEO optimization on websites. This actor analyzes the specific pages you specify (via startUrl and maxPages) and provides comprehensive heading analysis without automatic crawling.
 
@@ -137,4 +137,4 @@ Automated recommendations based on analysis:
 
 ## Support
 
-For issues and questions, please contact MySmartDigital support.
+For issues and questions, please contact Smart Digital support.

@@ -1,5 +1,5 @@
 /**
- * Test script for MSD Headings Analysis API
+ * Test script for SEO Headings Structure Analyzer API
  * 
  * @author MySmartDigital
  * @description Test script to verify the headings analysis API functionality
@@ -28,7 +28,7 @@ async function testHeadingsAnalysis() {
         const testInput = {
             startUrl: 'https://example.com',
             maxPages: 2,
-            userAgent: 'Mozilla/5.0 (compatible; MSD-Headings-Test/1.0)',
+            userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,
             maxRedirects: 5,
             includeHeadingText: true,
@@ -93,7 +93,7 @@ async function testWithRealWebsite() {
         const testInput = {
             startUrl: 'https://httpbin.org',
             maxPages: 1,
-            userAgent: 'Mozilla/5.0 (compatible; MSD-Headings-Test/1.0)',
+            userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,
             maxRedirects: 3,
             includeHeadingText: true,
@@ -117,7 +117,7 @@ async function testWithRealWebsite() {
 }
 
 async function runAllTests() {
-    console.log('🚀 Starting MSD Headings Analysis API Tests\n');
+    console.log('🚀 Starting SEO Headings Structure Analyzer API Tests\n');
     
     const healthCheck = await testHealthCheck();
     if (!healthCheck) {

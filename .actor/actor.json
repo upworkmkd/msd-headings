@@ -1,6 +1,6 @@
 {
 	"actorSpecification": 1,
-	"name": "msd-headings",
+	"name": "smart-digital/seo-headings-structure-analyzer",
 	"version": "0.0",
 	"buildTag": "latest",
 	"environmentVariables": {}
