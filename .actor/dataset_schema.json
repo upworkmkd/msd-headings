@@ -1,279 +1,219 @@
 {
-  "title": "SEO Headings Structure Analysis Output",
-  "description": "Output schema for SEO Headings Structure Analyzer - provides comprehensive heading analysis including structure, hierarchy, and SEO scoring",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-    "domain": {
-      "title": "Domain Statistics",
-      "description": "Aggregated statistics and analysis for the entire domain",
-      "type": "object",
-      "properties": {
-        "domain_name": {
-          "type": "string",
-          "description": "The domain URL that was analyzed"
-        },
-        "total_pages_analyzed": {
-          "type": "integer",
-          "description": "Total number of pages that were successfully analyzed"
-        },
-        "total_headings": {
-          "type": "integer",
-          "description": "Total count of all headings across all analyzed pages"
-        },
-        "total_h1": {
-          "type": "integer",
-          "description": "Total count of H1 headings"
-        },
-        "total_h2": {
-          "type": "integer",
-          "description": "Total count of H2 headings"
-        },
-        "total_h3": {
-          "type": "integer",
-          "description": "Total count of H3 headings"
-        },
-        "total_h4": {
-          "type": "integer",
-          "description": "Total count of H4 headings"
-        },
-        "total_h5": {
-          "type": "integer",
-          "description": "Total count of H5 headings"
-        },
-        "total_h6": {
-          "type": "integer",
-          "description": "Total count of H6 headings"
-        },
-        "average_heading_score": {
-          "type": "number",
-          "description": "Average heading score across all pages (0-100)"
-        },
-        "pages_with_h1": {
-          "type": "integer",
-          "description": "Number of pages that have at least one H1 tag"
-        },
-        "pages_with_h1_percentage": {
-          "type": "number",
-          "description": "Percentage of pages with H1 tags"
-        },
-        "pages_with_good_structure": {
-          "type": "integer",
-          "description": "Number of pages with good heading structure"
-        },
-        "pages_with_good_structure_percentage": {
-          "type": "number",
-          "description": "Percentage of pages with good heading structure"
-        },
-        "total_heading_issues": {
-          "type": "integer",
-          "description": "Total number of heading issues detected"
-        },
-        "critical_issues": {
-          "type": "integer",
-          "description": "Number of critical heading issues"
-        },
-        "warning_issues": {
-          "type": "integer",
-          "description": "Number of warning-level heading issues"
-        },
-        "analysis_summary": {
-          "type": "object",
-          "description": "High-level summary of the heading analysis",
-          "properties": {
-            "has_heading_issues": {
-              "type": "boolean",
-              "description": "Whether any heading issues were detected"
-            },
-            "needs_h1_improvement": {
-              "type": "boolean",
-              "description": "Whether H1 tags need improvement"
-            },
-            "has_good_structure": {
-              "type": "boolean",
-              "description": "Whether the overall heading structure is good"
-            },
-            "average_score_grade": {
-              "type": "string",
-              "description": "Letter grade for average heading score (A-F)"
-            }
-          }
-        }
-      }
-    },
-    "pages": {
-      "title": "Page Analysis Results",
-      "description": "Detailed analysis results for each analyzed page",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string",
-            "description": "The URL of the analyzed page"
-          },
-          "pageStatusCode": {
-            "type": "integer",
-            "description": "HTTP status code received for the page"
-          },
-          "analysis_date": {
-            "type": "string",
-            "format": "date-time",
-            "description": "ISO 8601 timestamp of when the analysis was performed"
-          },
-          "data_source": {
-            "type": "string",
-            "description": "Identifier for the data source"
-          },
-          "h1": {
-            "type": "array",
-            "description": "Array of H1 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h2": {
-            "type": "array",
-            "description": "Array of H2 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h3": {
-            "type": "array",
-            "description": "Array of H3 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h4": {
-            "type": "array",
-            "description": "Array of H4 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h5": {
-            "type": "array",
-            "description": "Array of H5 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h6": {
-            "type": "array",
-            "description": "Array of H6 heading texts",
-            "items": {
-              "type": "string"
-            }
-          },
-          "h1Count": {
-            "type": "integer",
-            "description": "Count of H1 headings on the page"
-          },
-          "h2Count": {
-            "type": "integer",
-            "description": "Count of H2 headings on the page"
-          },
-          "h3Count": {
-            "type": "integer",
-            "description": "Count of H3 headings on the page"
-          },
-          "h4Count": {
-            "type": "integer",
-            "description": "Count of H4 headings on the page"
-          },
-          "h5Count": {
-            "type": "integer",
-            "description": "Count of H5 headings on the page"
-          },
-          "h6Count": {
-            "type": "integer",
-            "description": "Count of H6 headings on the page"
-          },
-          "totalHeadings": {
-            "type": "integer",
-            "description": "Total count of all headings on the page"
-          },
-          "headingStructure": {
-            "type": "array",
-            "description": "Detailed structure of each heading on the page",
-            "items": {
-              "type": "object",
-              "properties": {
-                "tag": {
-                  "type": "string",
-                  "description": "The heading tag (h1, h2, h3, etc.)"
-                },
-                "level": {
-                  "type": "integer",
-                  "description": "The heading level (1-6)"
-                },
-                "text": {
-                  "type": "string",
-                  "description": "The heading text content"
-                },
-                "position": {
-                  "type": "integer",
-                  "description": "Position of the heading in the page"
-                },
-                "length": {
-                  "type": "integer",
-                  "description": "Character length of the heading text"
-                },
-                "wordCount": {
-                  "type": "integer",
-                  "description": "Word count in the heading text"
-                }
-              }
-            }
-          },
-          "headingScore": {
-            "type": "number",
-            "description": "SEO score for heading structure (0-100)"
-          },
-          "headingIssues": {
-            "type": "array",
-            "description": "List of heading issues detected on the page",
-            "items": {
-              "type": "string"
-            }
-          },
-          "headingRecommendations": {
-            "type": "array",
-            "description": "List of recommendations to improve heading structure",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "analysis": {
-      "title": "Analysis Metadata",
-      "description": "Metadata about the analysis run",
-      "type": "object",
-      "properties": {
-        "total_pages_processed": {
-          "type": "integer",
-          "description": "Total number of pages processed in this analysis"
-        },
-        "analysis_completed_at": {
-          "type": "string",
-          "format": "date-time",
-          "description": "ISO 8601 timestamp of when the analysis completed"
-        },
-        "headings_engine_version": {
-          "type": "string",
-          "description": "Version of the headings analysis engine used"
-        },
-        "data_format_version": {
-          "type": "string",
-          "description": "Version of the data output format"
-        }
-      }
-    }
-  },
-  "required": ["domain", "pages", "analysis"]
+	"actorSpecification": 1,
+	"fields": {
+		"type": "object",
+		"properties": {
+			"domain": {
+				"type": "object",
+				"description": "Aggregated statistics and analysis for the entire domain"
+			},
+			"pages": {
+				"type": "array",
+				"description": "Detailed analysis results for each analyzed page"
+			},
+			"analysis": {
+				"type": "object",
+				"description": "Metadata about the analysis run"
+			}
+		}
+	},
+	"views": {
+		"overview": {
+			"title": "Overview",
+			"description": "Overview of heading analysis results",
+			"transformation": {
+				"fields": [
+					"domain.domain_name",
+					"domain.total_pages_analyzed",
+					"domain.total_headings",
+					"domain.total_h1",
+					"domain.total_h2",
+					"domain.total_h3",
+					"domain.average_heading_score",
+					"domain.pages_with_h1_percentage",
+					"domain.pages_with_good_structure_percentage",
+					"domain.total_heading_issues",
+					"domain.critical_issues",
+					"domain.warning_issues"
+				],
+				"flatten": ["domain"]
+			},
+			"display": {
+				"component": "table",
+				"properties": {
+					"domain.domain_name": {
+						"label": "Domain",
+						"format": "text"
+					},
+					"domain.total_pages_analyzed": {
+						"label": "Pages Analyzed",
+						"format": "number"
+					},
+					"domain.total_headings": {
+						"label": "Total Headings",
+						"format": "number"
+					},
+					"domain.total_h1": {
+						"label": "H1 Count",
+						"format": "number"
+					},
+					"domain.total_h2": {
+						"label": "H2 Count",
+						"format": "number"
+					},
+					"domain.total_h3": {
+						"label": "H3 Count",
+						"format": "number"
+					},
+					"domain.average_heading_score": {
+						"label": "Average Score",
+						"format": "number"
+					},
+					"domain.pages_with_h1_percentage": {
+						"label": "Pages with H1 (%)",
+						"format": "number"
+					},
+					"domain.pages_with_good_structure_percentage": {
+						"label": "Good Structure (%)",
+						"format": "number"
+					},
+					"domain.total_heading_issues": {
+						"label": "Total Issues",
+						"format": "number"
+					},
+					"domain.critical_issues": {
+						"label": "Critical Issues",
+						"format": "number"
+					},
+					"domain.warning_issues": {
+						"label": "Warnings",
+						"format": "number"
+					}
+				}
+			}
+		},
+		"pages": {
+			"title": "Pages Detail",
+			"description": "Detailed heading analysis for each page",
+			"transformation": {
+				"fields": [
+					"url",
+					"pageTitle",
+					"pageStatusCode",
+					"h1Count",
+					"h2Count",
+					"h3Count",
+					"totalHeadings",
+					"headingScore",
+					"headingIssues",
+					"headingRecommendations"
+				],
+				"unwind": ["pages"]
+			},
+			"display": {
+				"component": "table",
+				"properties": {
+					"url": {
+						"label": "Page URL",
+						"format": "link"
+					},
+					"pageTitle": {
+						"label": "Page Title",
+						"format": "text"
+					},
+					"pageStatusCode": {
+						"label": "Status",
+						"format": "number"
+					},
+					"h1Count": {
+						"label": "H1 Count",
+						"format": "number"
+					},
+					"h2Count": {
+						"label": "H2 Count",
+						"format": "number"
+					},
+					"h3Count": {
+						"label": "H3 Count",
+						"format": "number"
+					},
+					"totalHeadings": {
+						"label": "Total Headings",
+						"format": "number"
+					},
+					"headingScore": {
+						"label": "SEO Score",
+						"format": "number"
+					},
+					"headingIssues": {
+						"label": "Issues",
+						"format": "array"
+					},
+					"headingRecommendations": {
+						"label": "Recommendations",
+						"format": "array"
+					}
+				}
+			}
+		},
+		"detailed": {
+			"title": "Detailed Headings",
+			"description": "Detailed heading structure for each page",
+			"transformation": {
+				"fields": [
+					"url",
+					"pageTitle",
+					"h1",
+					"h2",
+					"h3",
+					"h4",
+					"h5",
+					"h6",
+					"headingStructure"
+				],
+				"unwind": ["pages"]
+			},
+			"display": {
+				"component": "table",
+				"properties": {
+					"url": {
+						"label": "Page URL",
+						"format": "link"
+					},
+					"pageTitle": {
+						"label": "Page Title",
+						"format": "text"
+					},
+					"h1": {
+						"label": "H1 Tags",
+						"format": "array"
+					},
+					"h2": {
+						"label": "H2 Tags",
+						"format": "array"
+					},
+					"h3": {
+						"label": "H3 Tags",
+						"format": "array"
+					},
+					"h4": {
+						"label": "H4 Tags",
+						"format": "array"
+					},
+					"h5": {
+						"label": "H5 Tags",
+						"format": "array"
+					},
+					"h6": {
+						"label": "H6 Tags",
+						"format": "array"
+					},
+					"headingStructure": {
+						"label": "Heading Structure",
+						"format": "array"
+					}
+				}
+			}
+		}
+	}
 }
-

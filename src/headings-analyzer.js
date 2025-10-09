@@ -38,10 +38,10 @@ class HeadingsAnalyzer {
             this.calculateHeadingScore(headingStructure, title) : undefined;
         
         // Analyze heading issues
-        const headingIssues = this.analyzeHeadingIssues(basicHeadings, headingStructure);
+        const headingIssues = this.analyzeHeadingIssues(basicHeadings, headingStructure, title);
         
         // Generate recommendations
-        const headingRecommendations = this.generateRecommendations(basicHeadings, headingStructure, headingScore);
+        const headingRecommendations = this.generateRecommendations(basicHeadings, headingStructure, headingScore, title);
         
         // Extract internal links for crawling (but don't include in response)
         const internalLinks = this.extractInternalLinks($, url, baseDomain);
@@ -198,7 +198,7 @@ class HeadingsAnalyzer {
         return Math.max(0, Math.min(100, score));
     }
 
-    analyzeHeadingIssues(basicHeadings, headingStructure) {
+    analyzeHeadingIssues(basicHeadings, headingStructure, title) {
         const issues = [];
 
         // Check for missing H1
@@ -209,6 +209,17 @@ class HeadingsAnalyzer {
         // Check for multiple H1s
         if (basicHeadings.h1Count > 1) {
             issues.push('multiple H1 tags');
+        }
+
+        // Check if H1 is identical to page title (bad for SEO)
+        if (title && basicHeadings.h1.length > 0) {
+            const normalizedTitle = title.toLowerCase().trim();
+            const h1MatchesTitle = basicHeadings.h1.some(h1 => 
+                h1.toLowerCase().trim() === normalizedTitle
+            );
+            if (h1MatchesTitle) {
+                issues.push('H1 identical to page title');
+            }
         }
 
         // Check heading hierarchy
@@ -247,7 +258,7 @@ class HeadingsAnalyzer {
         return [...new Set(issues)]; // Remove duplicates
     }
 
-    generateRecommendations(basicHeadings, headingStructure, headingScore) {
+    generateRecommendations(basicHeadings, headingStructure, headingScore, title) {
         const recommendations = [];
 
         // H1 recommendations
@@ -255,6 +266,17 @@ class HeadingsAnalyzer {
             recommendations.push('Add a single H1 tag to each page for better SEO');
         } else if (basicHeadings.h1Count > 1) {
             recommendations.push('Use only one H1 tag per page for better SEO structure');
+        }
+
+        // Check if H1 is identical to page title
+        if (title && basicHeadings.h1.length > 0) {
+            const normalizedTitle = title.toLowerCase().trim();
+            const h1MatchesTitle = basicHeadings.h1.some(h1 => 
+                h1.toLowerCase().trim() === normalizedTitle
+            );
+            if (h1MatchesTitle) {
+                recommendations.push('H1 should differ from page title - use complementary but not identical text for better SEO');
+            }
         }
 
         // Hierarchy recommendations

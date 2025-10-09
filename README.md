@@ -109,7 +109,7 @@ The dataset contains the same data but wrapped in an array (standard Apify forma
 ### Issue Detection
 The analyzer identifies common heading problems:
 
-- **Critical Issues**: Missing H1, multiple H1s, skipped hierarchy levels
+- **Critical Issues**: Missing H1, multiple H1s, skipped hierarchy levels, H1 identical to page title
 - **Warning Issues**: Too many consecutive same-level headings, text length issues
 - **Info Issues**: General recommendations for improvement
 
@@ -133,7 +133,8 @@ Automated recommendations based on analysis:
 2. **Logical Hierarchy**: H1 → H2 → H3 progression
 3. **Appropriate Text Length**: 10-100 character headings
 4. **Keyword Relevance**: Headings related to page title
-5. **Content Organization**: Multiple H2s and H3s for structure
+5. **H1 vs Title Differentiation**: H1 should complement, not duplicate, the page title
+6. **Content Organization**: Multiple H2s and H3s for structure
 
 ## Support
 

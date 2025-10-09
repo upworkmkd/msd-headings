@@ -128,6 +128,17 @@ The scoring system evaluates:
    - Rewards pages with multiple H2s and H3s
    - Encourages good content organization
 
+## SEO Validation Rules
+
+The analyzer checks for common SEO issues:
+
+- **Missing H1**: Every page should have exactly one H1 tag
+- **Multiple H1s**: Only one H1 per page is recommended
+- **Hierarchy Skips**: Headings should progress logically (H1→H2→H3, not H1→H3)
+- **H1 Identical to Title**: The H1 should complement the page title, not duplicate it exactly
+- **Text Length**: Headings should be 10-100 characters for optimal readability
+- **Content Structure**: Multiple H2/H3 tags for better organization
+
 ## Environment Variables
 
 Create a `.env` file with the following variables:

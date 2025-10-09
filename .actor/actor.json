@@ -1,7 +1,11 @@
 {
 	"actorSpecification": 1,
-	"name": "smart-digital/seo-headings-structure-analyzer",
-	"version": "0.0",
+	"name": "seo-headings-structure-analyzer",
+	"title": "SEO Headings Structure Analyzer",
+	"version": "1.0",
 	"buildTag": "latest",
-	"environmentVariables": {}
+	"environmentVariables": {},
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	}
 }
