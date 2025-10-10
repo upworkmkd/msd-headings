@@ -8,7 +8,7 @@
       "type": "string",
       "description": "The homepage URL to start crawling from",
       "pattern": "^https?://.*",
-      "prefill": "https://example.com",
+      "prefill": "https://mysmartdigital.fr/",
       "editor": "textfield"
     },
     "maxPages": {

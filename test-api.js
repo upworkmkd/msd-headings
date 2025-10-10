@@ -26,8 +26,8 @@ async function testHeadingsAnalysis() {
         console.log('\nTesting headings analysis...');
         
         const testInput = {
-            startUrl: 'https://example.com',
-            maxPages: 2,
+            startUrl: 'https://mysmartdigital.fr',
+            maxPages: 4,
             userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,
             maxRedirects: 5,

@@ -26,7 +26,7 @@ async function testHeadingsAnalyzer() {
         const urlNormalizer = new URLNormalizer();
 
         // Test URL
-        const testUrl = 'https://example.com';
+        const testUrl = 'https://mysmartdigital.fr/';
         console.log(`Testing with URL: ${testUrl}`);
 
         // Fetch page content

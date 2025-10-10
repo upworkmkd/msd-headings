@@ -11,6 +11,7 @@ A specialized Apify actor for analyzing heading structure, hierarchy, and SEO op
 - **Domain-Level Statistics**: Aggregated analysis across specified pages
 - **SEO Optimization**: Focuses on heading structure for better search engine visibility
 - **Focused Analysis**: Analyzes only the pages you specify, no automatic crawling
+- **Event-Based Pricing**: Pay per page analyzed - transparent and predictable costs
 
 ## Output Format
 
@@ -26,7 +27,7 @@ Access via `Actor.getValue('OUTPUT')` or through the Apify platform's key-value 
 ```json
 {
   "domain": {
-    "domain_name": "https://example.com",
+    "domain_name": "https://mysmartdigital.fr/",
     "total_pages_analyzed": 2,
     "total_headings": 15,
     "total_h1": 2,
@@ -49,7 +50,7 @@ Access via `Actor.getValue('OUTPUT')` or through the Apify platform's key-value 
   },
   "pages": [
     {
-      "url": "https://example.com/",
+      "url": "https://mysmartdigital.fr/",
       "pageStatusCode": 200,
       "analysis_date": "2024-01-01T00:00:00.000Z",
       "data_source": "msd_headings",

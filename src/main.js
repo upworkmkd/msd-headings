@@ -14,7 +14,7 @@ const { URLNormalizer } = require('./url-normalizer');
 Actor.main(async () => {
     const input = await Actor.getInput();
     const {
-        startUrl = 'https://example.com',
+        startUrl = 'https://mysmartdigital.fr',
         maxPages = 2,
         userAgent = 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)',
         timeout = 10000,
@@ -43,6 +43,7 @@ Actor.main(async () => {
         const visitedUrls = new Set();
         const urlsToProcess = [startUrl];
         let processedCount = 0;
+        let pagesAnalyzedCount = 0; // Track billable events for monetization
         
         // Extract domain from start URL
         const baseDomain = new URL(startUrl).origin;
@@ -94,6 +95,9 @@ Actor.main(async () => {
                 };
 
                 results.push(pageResult);
+                
+                // Track this page analysis as a billable event for monetization
+                pagesAnalyzedCount++;
                 
                 console.log(`Completed analysis for: ${normalizedUrl} (Status: ${statusCode})`);
                 console.log(`Found ${headingsData.totalHeadings} headings (H1: ${headingsData.h1Count}, H2: ${headingsData.h2Count}, H3: ${headingsData.h3Count})`);
@@ -191,9 +195,13 @@ Actor.main(async () => {
         // Also push to dataset for compatibility
         await Actor.pushData(finalOutput);
 
+        // Report usage for event-based billing
+        await Actor.setValue('PAGE_ANALYZED', pagesAnalyzedCount);
+
         console.log(`Headings Analysis completed! Processed ${results.length} pages.`);
         console.log(`Average heading score: ${domainAnalysis.average_heading_score}/100`);
         console.log(`Pages with proper H1: ${domainAnalysis.pages_with_h1_percentage}%`);
+        console.log(`Billable events (pages analyzed): ${pagesAnalyzedCount}`);
 
     } catch (error) {
         console.error('General error:', error);
