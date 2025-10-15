@@ -15,6 +15,7 @@ Actor.main(async () => {
     const input = await Actor.getInput();
     const {
         startUrl = 'https://mysmartdigital.fr',
+        crawlUrls = false,
         maxPages = 2,
         userAgent = 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)',
         timeout = 10000,
@@ -48,13 +49,19 @@ Actor.main(async () => {
         // Extract domain from start URL
         const baseDomain = new URL(startUrl).origin;
         
-        while (urlsToProcess.length > 0 && processedCount < maxPages) {
+        // Determine the maximum pages to process
+        const effectiveMaxPages = crawlUrls ? maxPages : 1;
+        
+        console.log(`Crawl mode: ${crawlUrls ? 'Multi-page crawling enabled' : 'Single page analysis only'}`);
+        console.log(`Maximum pages to process: ${effectiveMaxPages}`);
+        
+        while (urlsToProcess.length > 0 && processedCount < effectiveMaxPages) {
             const currentUrl = urlsToProcess.shift();
             
             if (visitedUrls.has(currentUrl)) continue;
             visitedUrls.add(currentUrl);
             
-            console.log(`Processing: ${currentUrl} (${processedCount + 1}/${maxPages})`);
+            console.log(`Processing: ${currentUrl} (${processedCount + 1}/${effectiveMaxPages})`);
             
             try {
                 // Fetch page content
@@ -105,8 +112,8 @@ Actor.main(async () => {
                     console.log(`Heading Score: ${headingsData.headingScore}/100`);
                 }
                 
-                // Extract internal links for further crawling
-                if (headingsData._internalLinks && headingsData._internalLinks.length > 0) {
+                // Extract internal links for further crawling (only if crawlUrls is enabled)
+                if (crawlUrls && headingsData._internalLinks && headingsData._internalLinks.length > 0) {
                     for (const linkObj of headingsData._internalLinks) {
                         try {
                             const link = linkObj.url || linkObj;

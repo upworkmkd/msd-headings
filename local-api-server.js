@@ -35,6 +35,7 @@ app.post('/analyze', async (req, res) => {
     try {
         const {
             startUrl,
+            crawlUrls = false,
             maxPages = 2,
             userAgent = 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer/1.0)',
             timeout = 10000,
@@ -52,7 +53,8 @@ app.post('/analyze', async (req, res) => {
         }
 
         console.log(`Starting headings analysis for: ${startUrl}`);
-        console.log(`Max pages: ${maxPages}`);
+        console.log(`Crawl mode: ${crawlUrls ? 'Multi-page crawling enabled' : 'Single page analysis only'}`);
+        console.log(`Max pages: ${crawlUrls ? maxPages : 1}`);
 
         // Initialize analyzer
         const headingsAnalyzer = new HeadingsAnalyzer({
@@ -72,13 +74,16 @@ app.post('/analyze', async (req, res) => {
         // Extract domain from start URL
         const baseDomain = new URL(startUrl).origin;
         
-        while (urlsToProcess.length > 0 && processedCount < maxPages) {
+        // Determine the maximum pages to process
+        const effectiveMaxPages = crawlUrls ? maxPages : 1;
+        
+        while (urlsToProcess.length > 0 && processedCount < effectiveMaxPages) {
             const currentUrl = urlsToProcess.shift();
             
             if (visitedUrls.has(currentUrl)) continue;
             visitedUrls.add(currentUrl);
             
-            console.log(`Processing: ${currentUrl} (${processedCount + 1}/${maxPages})`);
+            console.log(`Processing: ${currentUrl} (${processedCount + 1}/${effectiveMaxPages})`);
             
             try {
                 // Fetch page content
@@ -126,8 +131,8 @@ app.post('/analyze', async (req, res) => {
                     console.log(`Heading Score: ${headingsData.headingScore}/100`);
                 }
                 
-                // Extract internal links for further crawling
-                if (headingsData._internalLinks && headingsData._internalLinks.length > 0) {
+                // Extract internal links for further crawling (only if crawlUrls is enabled)
+                if (crawlUrls && headingsData._internalLinks && headingsData._internalLinks.length > 0) {
                     for (const linkObj of headingsData._internalLinks) {
                         try {
                             const link = linkObj.url || linkObj;

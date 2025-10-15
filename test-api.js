@@ -27,6 +27,7 @@ async function testHeadingsAnalysis() {
         
         const testInput = {
             startUrl: 'https://mysmartdigital.fr',
+            crawlUrls: true,
             maxPages: 4,
             userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,
@@ -92,6 +93,7 @@ async function testWithRealWebsite() {
         
         const testInput = {
             startUrl: 'https://httpbin.org',
+            crawlUrls: false,
             maxPages: 1,
             userAgent: 'Mozilla/5.0 (compatible; SEO-Headings-Analyzer-Test/1.0)',
             timeout: 10000,

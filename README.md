@@ -1,6 +1,6 @@
 # SEO Headings Structure Analyzer
 
-A specialized Apify actor for analyzing heading structure, hierarchy, and SEO optimization on websites. This actor analyzes the specific pages you specify (via startUrl and maxPages) and provides comprehensive heading analysis without automatic crawling.
+A specialized Apify actor for analyzing heading structure, hierarchy, and SEO optimization on websites. This actor can analyze either a single page (startUrl only) or crawl multiple pages based on your configuration.
 
 ## Features
 
@@ -10,8 +10,31 @@ A specialized Apify actor for analyzing heading structure, hierarchy, and SEO op
 - **Configurable Analysis**: Choose what aspects to analyze (text, structure, scores)
 - **Domain-Level Statistics**: Aggregated analysis across specified pages
 - **SEO Optimization**: Focuses on heading structure for better search engine visibility
-- **Focused Analysis**: Analyzes only the pages you specify, no automatic crawling
+- **Flexible Crawling**: Choose between single-page analysis or multi-page crawling
+- **Configurable Scope**: Control whether to crawl internal links or analyze only the start URL
 - **Event-Based Pricing**: Pay per page analyzed - transparent and predictable costs
+
+## Configuration Options
+
+### Crawling Behavior
+
+The actor supports two analysis modes:
+
+1. **Single Page Analysis** (Default): `crawlUrls: false`
+   - Analyzes only the `startUrl`
+   - Ignores the `maxPages` parameter
+   - Fast and focused analysis
+
+2. **Multi-Page Crawling**: `crawlUrls: true`
+   - Crawls internal links starting from `startUrl`
+   - Respects the `maxPages` parameter to limit crawling
+   - Comprehensive domain analysis
+
+### Key Parameters
+
+- `startUrl`: The URL to start analysis from
+- `crawlUrls`: Boolean flag to enable/disable multi-page crawling (default: `false`)
+- `maxPages`: Maximum number of pages to analyze (only applies when `crawlUrls: true`)
 
 ## Output Format
 
