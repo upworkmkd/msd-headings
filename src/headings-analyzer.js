@@ -47,19 +47,30 @@ class HeadingsAnalyzer {
         const internalLinks = this.extractInternalLinks($, url, baseDomain);
         
         return {
-            // Basic heading counts and text
-            ...basicHeadings,
+            // Basic Page Information
+            pageTitle: title,
+            
+            // Headings Information (data first, then counts)
+            h1: basicHeadings.h1,
+            h2: basicHeadings.h2,
+            h3: basicHeadings.h3,
+            h4: basicHeadings.h4,
+            h5: basicHeadings.h5,
+            h6: basicHeadings.h6,
+            h1Count: basicHeadings.h1Count,
+            h2Count: basicHeadings.h2Count,
+            h3Count: basicHeadings.h3Count,
+            h4Count: basicHeadings.h4Count,
+            h5Count: basicHeadings.h5Count,
+            h6Count: basicHeadings.h6Count,
             totalHeadings: basicHeadings.h1Count + basicHeadings.h2Count + basicHeadings.h3Count + 
                           basicHeadings.h4Count + basicHeadings.h5Count + basicHeadings.h6Count,
             
-            // Detailed analysis
+            // Detailed Heading Analysis
             headingStructure: headingStructure,
             headingScore: headingScore,
             headingIssues: headingIssues,
             headingRecommendations: headingRecommendations,
-            
-            // Additional metadata
-            pageTitle: title,
             
             // Internal links for crawling (not included in final response)
             _internalLinks: internalLinks

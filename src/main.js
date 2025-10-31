@@ -42,12 +42,14 @@ Actor.main(async () => {
     try {
         const results = [];
         const visitedUrls = new Set();
-        const urlsToProcess = [startUrl];
+        // Normalize start URL before adding to processing queue
+        const normalizedStartUrl = urlNormalizer.normalize(startUrl);
+        const urlsToProcess = [normalizedStartUrl];
         let processedCount = 0;
         let pagesAnalyzedCount = 0; // Track billable events for monetization
         
-        // Extract domain from start URL
-        const baseDomain = new URL(startUrl).origin;
+        // Extract domain from normalized start URL
+        const baseDomain = new URL(normalizedStartUrl).origin;
         
         // Determine the maximum pages to process
         const effectiveMaxPages = crawlUrls ? maxPages : 1;
@@ -58,7 +60,11 @@ Actor.main(async () => {
         while (urlsToProcess.length > 0 && processedCount < effectiveMaxPages) {
             const currentUrl = urlsToProcess.shift();
             
-            if (visitedUrls.has(currentUrl)) continue;
+            // Check if already visited (currentUrl is already normalized)
+            if (visitedUrls.has(currentUrl)) {
+                console.log(`Skipping already processed URL: ${currentUrl}`);
+                continue;
+            }
             visitedUrls.add(currentUrl);
             
             console.log(`Processing: ${currentUrl} (${processedCount + 1}/${effectiveMaxPages})`);
@@ -81,8 +87,8 @@ Actor.main(async () => {
                 const html = response.data;
                 const statusCode = response.status;
                 
-                // Normalize URL
-                const normalizedUrl = urlNormalizer.normalize(currentUrl);
+                // Use normalized URL (currentUrl is already normalized)
+                const normalizedUrl = currentUrl;
                 
                 // Analyze headings on this page
                 const headingsData = await headingsAnalyzer.analyzePage({
